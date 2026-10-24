@@ -1,37 +1,35 @@
 # UCM — Ultimate Champion Mode
 
-Aplicación web móvil en español para organizar entrenamiento de gimnasio, registrar el peso y seguir hábitos de nutrición y progreso.
+Aplicación web de fitness en español, diseñada para móvil y escritorio. Reúne planificación de fuerza, nutrición orientativa y seguimiento personal en una interfaz oscura de alto contraste con acentos lima.
 
-## Estado actual
+## Funciones de esta versión
 
-Primera versión funcional construida como sitio estático en `index.html`. No requiere instalación de dependencias ni claves de API.
+- Panel diario con objetivos de peso, calorías, proteína y sesiones.
+- Perfil editable con edad, estatura, peso, sexo opcional para estimación energética, actividad, objetivo y presupuesto.
+- Rutina semanal: cuatro sesiones principales de fuerza, dos días ligeros y un día de descanso.
+- Sesión interactiva: marcar ejercicios completados y guardar el entrenamiento.
+- Nutrición con menú de ejemplo y lista de compras basada en alimentos accesibles en Perú.
+- Registro de peso, historial y gráfica de los últimos registros.
+- Fotos de progreso reducidas en el navegador y guardadas localmente.
+- Exportación e importación de copia JSON, y eliminación confirmada de datos locales.
+- Diseño adaptable a móviles, navegación inferior, validación básica y mensajes de estado.
 
-### Funciones incluidas
-- Perfil físico editable: edad, estatura, peso, objetivo, experiencia y disponibilidad.
-- Rutina semanal de ejemplo para principiante, con ejercicios, series y repeticiones.
-- Registro de sesiones y peso corporal.
-- Historial local y exportación de datos en JSON.
-- Referencia visual inicial y objetivo guardadas localmente en el navegador.
-- Guía de nutrición con ideas de alimentos accesibles en Perú.
-- Interfaz adaptable a pantallas móviles.
+## Abrir la aplicación
 
-## Ejecutar
+Abre `index.html` en un navegador moderno. Para una URL web pública, configura GitHub Pages desde **Settings → Pages**, seleccionando la rama `main` y la carpeta raíz `/(root)`.
 
-Abre `index.html` en un navegador o activa GitHub Pages en **Settings → Pages**, seleccionando la rama `main` y la carpeta `/(root)`.
+## Datos y privacidad
 
-## Limitaciones importantes
-- Los datos y las fotos permanecen en el almacenamiento local del navegador de ese dispositivo; no hay cuenta de usuario ni sincronización entre dispositivos.
-- Las recomendaciones nutricionales son orientativas y no sustituyen atención profesional.
-- Las fotografías se usan como referencia visual; la app no estima con precisión grasa corporal ni medidas a partir de imágenes.
-- Los registros de entrenamientos no incluyen todavía una bitácora detallada por ejercicio/carga.
-- No hay backend ni entrenador generativo conectado a un modelo de IA en esta versión.
+El perfil, los registros y las fotos se guardan en el almacenamiento local del navegador del dispositivo. No hay cuentas, sincronización en la nube ni backend en esta versión. Exporta una copia antes de cambiar de dispositivo o borrar los datos del navegador. No subas fotos personales al repositorio.
 
-## Próximos pasos sugeridos
-1. Probar el flujo en móvil y corregir errores.
-2. Añadir registro de series, repeticiones y cargas por ejercicio.
-3. Implementar autenticación y base de datos para sincronizar el progreso con seguridad.
-4. Añadir revisión de accesibilidad y pruebas automatizadas.
-5. Conectar funciones de IA solo después de definir proveedor, privacidad, costes y límites de uso.
+## Límites
 
-## Privacidad
-No subir fotos personales al repositorio. En esta versión las fotos se seleccionan desde el dispositivo y se almacenan en el navegador del usuario.
+- Las calorías son una estimación inicial mediante una ecuación general y un factor de actividad editable; no son una medición clínica del gasto energético.
+- La planificación es una guía general, no un diagnóstico ni una prescripción médica.
+- Las imágenes se guardan como referencia; la aplicación no estima de forma fiable grasa corporal a partir de fotografías.
+- No hay conexión con un modelo de IA ni asesoría generativa.
+- La app necesita pruebas manuales en los navegadores objetivo antes de considerarse una versión de producción.
+
+## Enfoque inicial de UCM
+
+Para el perfil provisional de 28 años, 170 cm y 78 kg, con trabajo de pie/caminando, la aplicación propone una referencia calórica ajustable y un objetivo de proteína cercano a 1,9 g/kg. Confirma el peso real y revisa tendencias de peso, cintura, energía y rendimiento después de 2–3 semanas antes de modificar el objetivo.
