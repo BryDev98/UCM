@@ -276,7 +276,7 @@ function initArenaAvatar(){
     put(new T.BoxGeometry(.25,.035,.08),bone,[.28,.12,.38],[1,1,1]);
     // Emblema pectoral y plataforma metálica.
     const crest=put(new T.OctahedronGeometry(.105,1),bright,[0,2.02,.43],[1,1,.35]);crest.rotation.z=Math.PI;
-    put(new T.CylinderGeometry(1.08,1.08,.028,48),material(0x131219,.65,.6),[0,-.015,0],[1,1,1]).rotation.x=Math.PI/2;
+    put(new T.CylinderGeometry(1.08,1.08,.028,48),material(0x131219,.65,.6),[0,-.015,0],[1,1,1]);
     const ring=put(new T.TorusGeometry(1.08,.012,6,64),bright,[0,.012,0],[1,1,1]);ring.rotation.x=Math.PI/2;
     const ring2=put(new T.TorusGeometry(1.19,.006,5,64),armor,[0,.014,0],[1,1,1]);ring2.rotation.x=Math.PI/2;
     const grid=new T.GridHelper(5,24,0x6c2635,0x30212a);grid.position.y=-.03;
