@@ -16,21 +16,35 @@ concurrency:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # Pages must be initialized once in Settings → Pages by a repository admin.
+      # GITHUB_TOKEN cannot enable the Pages site because that requires admin permissions.
       - name: Configure Pages
+        id: pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
+
+      - name: Verify Pages is configured
+        if: steps.pages.outputs.base_url == ''
+        run: |
+          echo "::error::GitHub Pages is not initialized for this repository."
+          echo "Open Settings → Pages and select GitHub Actions as the publishing source."
+          echo "Private repositories need GitHub Pro, Team, or Enterprise for Pages."
+          exit 1
+
       - name: Upload site artifact
+        if: steps.pages.outputs.base_url != ''
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
       - name: Deploy site
+        if: steps.pages.outputs.base_url != ''
         id: deployment
         uses: actions/deploy-pages@v4

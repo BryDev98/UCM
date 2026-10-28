@@ -18,11 +18,18 @@ Aplicación de fitness en español para móvil y escritorio. La dirección visua
 - PWA instalable con icono, manifiesto y caché básica de la interfaz para uso sin conexión.
 - Diseño adaptable, navegación inferior, controles con etiquetas accesibles y mensajes de estado.
 
-## Abrir e instalar
+## Publicar e instalar en el móvil
 
-1. Abre `index.html` en un navegador moderno para probar la aplicación localmente.
-2. Para instalación y caché sin conexión, publica el repositorio mediante GitHub Pages desde **Settings → Pages**, seleccionando la rama `main` y la carpeta raíz `/(root)`.
-3. Visita la URL HTTPS publicada y utiliza la opción **Instalar aplicación** o **Añadir a pantalla de inicio** del navegador. La disponibilidad exacta depende del navegador y del dispositivo.
+La app ya incluye manifiesto, icono, botón de instalación y caché básica. Para que el navegador permita instalarla, primero debe servirse desde una URL HTTPS.
+
+1. En GitHub abre este repositorio y entra en **Settings → Pages**. En **Build and deployment**, elige **GitHub Actions** como origen. Es una configuración inicial única; el workflow no intenta cambiar la configuración administrativa.
+2. Después de activar Pages, cada actualización de `main` publicará la app. La URL de proyecto esperada es `https://brydev98.github.io/UCM/`, pero solo estará disponible cuando Pages esté habilitado correctamente.
+3. En **Android**, abre esa URL desde Chrome. Pulsa **Instalar UCM** dentro de la app cuando el navegador ofrezca la instalación; si no aparece la ventana automática, usa el menú `⋮` → **Instalar aplicación** o **Añadir a pantalla de inicio**.
+4. En **iPhone**, abre la URL en Safari, toca **Compartir** y elige **Añadir a pantalla de inicio**.
+
+**Importante sobre repositorios privados:** GitHub Pages está disponible para repositorios privados con GitHub Pro, Team o Enterprise. En GitHub Free solo está disponible para repositorios públicos. No cambies la visibilidad de este repositorio principal sin decidirlo expresamente; si la cuenta no permite Pages privados, hará falta publicar únicamente una copia de distribución o usar otro hosting estático.
+
+Si abres `index.html` como archivo local, podrás probar la interfaz, pero no instalarla como PWA ni usar su service worker.
 
 La primera carga necesita conexión para descargar la biblioteca Three.js del avatar. Si no está disponible, la interfaz conserva una ilustración CSS alternativa.
 
