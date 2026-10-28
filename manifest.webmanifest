@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "UCM — Ultimate Champion Mode",
+  "short_name": "UCM",
+  "description": "Entrenamiento, nutrición y seguimiento personal en modo Dark Arena.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#07070a",
+  "theme_color": "#07070a",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
