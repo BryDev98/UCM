@@ -156,7 +156,7 @@ input[type=checkbox],input[type=radio]{accent-color:var(--crimson)}
 <header class="top"><div class="brand"><div class="logo">U</div><div>UCM<small>ULTIMATE CHAMPION MODE</small></div></div><div class="status" id="status">MODO PRINCIPIANTE</div></header>
 <section class="view active" id="home">
 <div class="hero dark-hero"><div class="hero-copy">
-<div class="eyebrow">PROTOCOLO DARK ARENA · UCM</div><h1>CONSTRUYE<br>TU MEJOR VERSIÓN.</h1><p>Entrenamiento de fuerza, nutrición inteligente y seguimiento realista. Diseñado para tu rutina y para avanzar sin atajos.</p><div class="actions"><button class="btn primary" onclick="beginSession()">▶ Empezar sesión</button><button class="btn soft" onclick="go('profile')">Personalizar mi plan ↗</button></div>
+<div class="eyebrow">PROTOCOLO DARK ARENA · UCM</div><h1>CONSTRUYE<br>TU MEJOR VERSIÓN.</h1><p>Entrenamiento de fuerza, nutrición inteligente y seguimiento realista. Diseñado para tu rutina y para avanzar sin atajos.</p><div class="actions"><button class="btn primary" onclick="beginSession()">▶ Empezar sesión</button><button class="btn soft" onclick="go('profile')">Personalizar mi plan ↗</button><button id="installApp" class="btn soft" type="button" onclick="installUCM()">Instalar UCM ↥</button></div>
 </div>
 <div class="hero-art" aria-label="Avatar tridimensional del campeón UCM">
 <canvas id="arenaCanvas" aria-hidden="true"></canvas>
@@ -203,6 +203,39 @@ try{const old=localStorage.getItem(KEY)||localStorage.getItem('ucm_v1_data');if(
 const $=id=>document.getElementById(id);let selectedDay=(new Date().getDay()+6)%7,activeChecks=[],activeMetrics={},restTimerInterval=null,restTimerEnd=0;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){notify('No se pudo guardar. Exporta tus datos y libera espacio.')}render()}
 function notify(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(window._toast);window._toast=setTimeout(()=>t.style.display='none',2400)}
+window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();
+  window.__ucmInstallPrompt=event;
+  const button=$('installApp');
+  if(button){button.textContent='Instalar aplicación ↥';button.classList.add('primary');button.classList.remove('soft');}
+});
+window.addEventListener('appinstalled',()=>{
+  window.__ucmInstallPrompt=null;
+  const button=$('installApp');
+  if(button){button.textContent='Aplicación instalada ✓';button.disabled=true;}
+  notify('UCM ya está instalada en este dispositivo');
+});
+async function installUCM(){
+  const promptEvent=window.__ucmInstallPrompt;
+  if(promptEvent){
+    try{
+      promptEvent.prompt();
+      const choice=await promptEvent.userChoice;
+      window.__ucmInstallPrompt=null;
+      if(choice&&choice.outcome==='accepted')notify('Instalación iniciada. Busca UCM en tu pantalla de inicio.');
+      else notify('Instalación cancelada. Puedes intentarlo otra vez desde el menú del navegador.');
+    }catch(error){notify('No se pudo abrir el instalador. Usa el menú del navegador para instalar UCM.');}
+    return;
+  }
+  const agent=navigator.userAgent||'';
+  if(/iphone|ipad|ipod/i.test(agent)&&!window.MSStream){
+    notify('En Safari: toca Compartir y elige “Añadir a pantalla de inicio”.');
+  }else if(/android/i.test(agent)){
+    notify('En Chrome: abre el menú ⋮ y toca “Instalar aplicación” o “Añadir a pantalla de inicio”.');
+  }else{
+    notify('Abre UCM en Chrome, Edge o Safari y usa el menú del navegador para añadirla a la pantalla de inicio.');
+  }
+}
 function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='session')renderSession()}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
 function targets(){const p=data.profile,w=Number(p.weight)||78,h=Number(p.height)||170,a=Number(p.age)||28;const bmr=10*w+6.25*h-5*a+(p.sex==='female'?-161:p.sex==='male'?5: -78);const activity=Number(p.activity)||1.45;const maintenance=bmr*activity;const calories=Math.round((maintenance-150)/50)*50;const protein=Math.round(w*1.9);const fats=70;const carbs=Math.max(100,Math.round((calories-protein*4-fats*9)/4));return {calories:Math.max(1600,calories),protein,fats,carbs,maintenance:Math.round(maintenance)}}
