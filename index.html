@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07070a"><meta name="description" content="UCM: entrenamiento, nutrición y seguimiento personal.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="UCM">
 <title>UCM — Dark Arena | Ultimate Champion Mode</title>
 <style>
 
@@ -178,6 +179,11 @@ input[type=checkbox],input[type=radio]{accent-color:var(--crimson)}
 <footer class="muted" style="text-align:center;padding:28px 8px">UCM · Ultimate Champion Mode<br>Plan general de bienestar. No sustituye una evaluación profesional.</footer>
 </main>
 <nav class="nav" aria-label="Navegación principal"><button class="active" data-view="home"><span>⌂</span>Inicio</button><button data-view="training"><span>▤</span>Rutinas</button><button data-view="nutrition"><span>◈</span>Nutrición</button><button data-view="progress"><span>↗</span>Progreso</button><button data-view="profile"><span>◎</span>Perfil</button></nav>
+<script>
+if('serviceWorker' in navigator && location.protocol!=='file:'){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}),{once:true});
+}
+</script>
 <script>(function(){var t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';t.async=true;t.onload=function(){if(window.__ucmInitArena)window.__ucmInitArena()};t.onerror=function(){var h=document.querySelector('.hero-art');if(h)h.classList.add('no-webgl')};document.head.appendChild(t)})();</script>
 
 <script>
@@ -203,7 +209,7 @@ function targets(){const p=data.profile,w=Number(p.weight)||78,h=Number(p.height
 function weightNow(){const p=Number(data.profile.weight);return data.weights.length?data.weights.slice().sort((a,b)=>b.date.localeCompare(a.date))[0].value:(p||78)}
 function weekStartMs(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-(d.getDay()+6)%7);return d.getTime()}
 function isCurrentWeek(session){const time=new Date(session.date).getTime();return Number.isFinite(time)&&time>=weekStartMs()&&time<weekStartMs()+7*86400000}
-function render(){const p=data.profile,t=targets();$('mWeight').innerHTML=weightNow()+' <small>kg'+(data.weights.length?'':'*')+'</small>';$('weightNote').textContent=data.weights.length?'Último registro':'Estimación provisional';$('mCalories').textContent=t.calories.toLocaleString('es-PE');$('mProtein').textContent=t.protein+' g';$('mSessions').textContent=data.sessions.length;$('status').textContent=(p.experience||'Principiante').toUpperCase();$('nCalories').textContent=t.calories.toLocaleString('es-PE')+' kcal';$('nProtein').textContent=t.protein+' g';$('nCarbs').textContent=t.carbs+' g';$('todayLabel').textContent=plans[selectedDay].short;renderDays();renderWeek();renderProgress();renderProfile();renderShopping();$('weekCount').textContent=data.sessions.filter(s=>s.kind==='Fuerza'&&isCurrentWeek(s)).length;$('weekBar').style.width=Math.min(100,$('weekCount').textContent/4*100)+'%'}
+function render(){const p=data.profile,t=targets();$('mWeight').innerHTML=weightNow()+' <small>kg'+(data.weights.length?'':'*')+'</small>';$('weightNote').textContent=data.weights.length?'Último registro':'Estimación provisional';$('mCalories').textContent=t.calories.toLocaleString('es-PE');$('mProtein').textContent=t.protein+' g';$('mSessions').textContent=data.sessions.length;$('status').textContent=(p.experience||'Principiante').toUpperCase();$('nCalories').textContent=t.calories.toLocaleString('es-PE')+' kcal';$('nProtein').textContent=t.protein+' g';$('nCarbs').textContent=t.carbs+' g';$('todayLabel').textContent=plans[selectedDay].short;renderDays();renderWeek();renderProgress();renderProfile();renderShopping();$('weekCount').textContent=data.sessions.filter(s=>(s.kind||plans[s.day]?.kind)==='Fuerza'&&isCurrentWeek(s)).length;$('weekBar').style.width=Math.min(100,$('weekCount').textContent/4*100)+'%'}
 function renderDays(){$('dayPicker').innerHTML=plans.map((p,i)=>'<button class="day '+(i===selectedDay?'active':'')+'" onclick="selectedDay='+i+';render()">'+p.short+'</button>').join('');const p=plans[selectedDay];$('todayWorkout').innerHTML='<div class="eyebrow">'+p.kind+'</div><h3 style="margin:7px 0">'+p.name+'</h3>'+p.items.slice(0,4).map((x,i)=>'<div class="exercise"><div class="num">'+String(i+1).padStart(2,'0')+'</div><div><b>'+x[0]+'</b><small>'+x[2]+'</small></div><div class="sets">'+x[1]+'</div></div>').join('')}
 function renderWeek(){$('weekPlan').innerHTML=plans.map((p,i)=>'<div class="card" style="margin-bottom:12px"><div class="eyebrow">'+p.short+' · '+p.kind+'</div><h3 style="margin:7px 0 4px">'+p.name+'</h3>'+p.items.map((x,j)=>'<div class="exercise"><div class="num">'+(j+1)+'</div><div><b>'+x[0]+'</b><small>'+x[2]+'</small></div><div class="sets">'+x[1]+'</div></div>').join('')+(i<5?'<p class="muted">Descanso orientativo: 60–180 segundos.</p>':'')+'</div>').join('')}
 function beginSession(){activeChecks=[];activeMetrics={};stopRestTimer();go('session');renderSession()}
