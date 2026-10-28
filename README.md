@@ -1,35 +1,43 @@
 # UCM — Ultimate Champion Mode
 
-Aplicación web de fitness en español, diseñada para móvil y escritorio. Reúne planificación de fuerza, nutrición orientativa y seguimiento personal en una interfaz oscura de alto contraste con acentos lima.
+Aplicación de fitness en español para móvil y escritorio. La dirección visual actual es **Dark Arena**: negro obsidiana, carmesí, blanco hueso y detalles metálicos.
 
-## Funciones de esta versión
+## Funciones
 
-- Panel diario con objetivos de peso, calorías, proteína y sesiones.
-- Perfil editable con edad, estatura, peso, sexo opcional para estimación energética, actividad, objetivo y presupuesto.
-- Rutina semanal: cuatro sesiones principales de fuerza, dos días ligeros y un día de descanso.
-- Sesión interactiva: marcar ejercicios completados y guardar el entrenamiento.
-- Nutrición con menú de ejemplo y lista de compras basada en alimentos accesibles en Perú.
-- Registro de peso, historial y gráfica de los últimos registros.
-- Fotos de progreso reducidas en el navegador y guardadas localmente.
-- Exportación e importación de copia JSON, y eliminación confirmada de datos locales.
-- Diseño adaptable a móviles, navegación inferior, validación básica y mensajes de estado.
+- Panel de objetivos diarios de peso, calorías y proteína.
+- Perfil editable con edad, estatura, peso, cintura opcional, actividad, experiencia, objetivo y presupuesto.
+- Rutina semanal de cuatro sesiones principales de fuerza, dos días ligeros y un día de descanso.
+- Sesión interactiva con ejercicios completados, carga en kg, repeticiones realizadas y temporizador de descanso de 90 o 120 segundos.
+- Historial de entrenamientos con detalle de ejercicios, cargas y repeticiones.
+- Recuento semanal de sesiones de fuerza basado en la semana natural de lunes a domingo.
+- Nutrición orientativa, menú de ejemplo y lista de compras para alimentos accesibles en Perú.
+- Registro de peso, gráfica de los últimos registros y tendencias simples.
+- Fotos de progreso reducidas en el navegador y almacenadas localmente.
+- Exportación e importación de copia JSON y eliminación confirmada de datos locales.
+- Avatar de campeón 3D procedural con alternativa CSS si WebGL o la descarga de Three.js no están disponibles.
+- PWA instalable con icono, manifiesto y caché básica de la interfaz para uso sin conexión.
+- Diseño adaptable, navegación inferior, controles con etiquetas accesibles y mensajes de estado.
 
-## Abrir la aplicación
+## Abrir e instalar
 
-Abre `index.html` en un navegador moderno. Para una URL web pública, configura GitHub Pages desde **Settings → Pages**, seleccionando la rama `main` y la carpeta raíz `/(root)`.
+1. Abre `index.html` en un navegador moderno para probar la aplicación localmente.
+2. Para instalación y caché sin conexión, publica el repositorio mediante GitHub Pages desde **Settings → Pages**, seleccionando la rama `main` y la carpeta raíz `/(root)`.
+3. Visita la URL HTTPS publicada y utiliza la opción **Instalar aplicación** o **Añadir a pantalla de inicio** del navegador. La disponibilidad exacta depende del navegador y del dispositivo.
+
+La primera carga necesita conexión para descargar la biblioteca Three.js del avatar. Si no está disponible, la interfaz conserva una ilustración CSS alternativa.
 
 ## Datos y privacidad
 
-El perfil, los registros y las fotos se guardan en el almacenamiento local del navegador del dispositivo. No hay cuentas, sincronización en la nube ni backend en esta versión. Exporta una copia antes de cambiar de dispositivo o borrar los datos del navegador. No subas fotos personales al repositorio.
+El perfil, los entrenamientos, los registros de peso, la lista de compras y las fotos se guardan en el almacenamiento local del navegador del dispositivo. No hay cuentas, sincronización en la nube ni backend en esta versión. La caché de la PWA guarda la interfaz básica; no sincroniza datos entre dispositivos. Exporta una copia antes de cambiar de dispositivo o borrar los datos del navegador. No subas fotos personales al repositorio.
 
-## Límites
+## Límites y seguridad
 
-- Las calorías son una estimación inicial mediante una ecuación general y un factor de actividad editable; no son una medición clínica del gasto energético.
+- Las calorías son una estimación general, no una medición clínica del gasto energético.
 - La planificación es una guía general, no un diagnóstico ni una prescripción médica.
-- Las imágenes se guardan como referencia; la aplicación no estima de forma fiable grasa corporal a partir de fotografías.
+- Las imágenes se guardan como referencia; la aplicación no estima de forma fiable la grasa corporal a partir de fotografías.
 - No hay conexión con un modelo de IA ni asesoría generativa.
-- La app necesita pruebas manuales en los navegadores objetivo antes de considerarse una versión de producción.
+- La sintaxis de JavaScript y la estructura se verifican en el flujo de desarrollo; aún deben realizarse pruebas manuales en navegadores y dispositivos reales antes de considerar la app lista para producción.
 
-## Enfoque inicial de UCM
+## Perfil inicial
 
-Para el perfil provisional de 28 años, 170 cm y 78 kg, con trabajo de pie/caminando, la aplicación propone una referencia calórica ajustable y un objetivo de proteína cercano a 1,9 g/kg. Confirma el peso real y revisa tendencias de peso, cintura, energía y rendimiento después de 2–3 semanas antes de modificar el objetivo.
+La app comienza con valores de ejemplo de 28 años, 170 cm y 78 kg. Revisa esos valores en **Perfil** y confirma el peso real antes de usar los objetivos calculados. Un objetivo de proteína cercano a 1,9 g/kg es una referencia ajustable, no una necesidad universal.
