@@ -1,4 +1,4 @@
-const VERSION = 'ucm-arena-v1';
+const VERSION = 'ucm-arena-v2';
 const BASE = new URL('./', self.registration.scope);
 const CORE = [
   BASE.href,
