@@ -18,7 +18,15 @@ Aplicación de fitness en español para móvil y escritorio. La dirección visua
 - PWA instalable con icono, manifiesto y caché básica de la interfaz para uso sin conexión.
 - Diseño adaptable, navegación inferior, controles con etiquetas accesibles y mensajes de estado.
 
-## Publicar e instalar en el móvil
+## Aplicación Android instalable (APK)
+
+El proyecto incluye una compilación Android con Capacitor que empaqueta la interfaz de UCM en una aplicación instalable, con nombre e identificador propios (`UCM`, `com.barosela.ucm`). No necesita GitHub Pages para compilar el APK.
+
+Para obtener el instalador: abre la pestaña **Actions** del repositorio, ejecuta **Build UCM Android APK** con **Run workflow** y descarga el artefacto **UCM-Android-debug-APK** al terminar. Dentro encontrarás `app-debug.apk`; transfiérelo al teléfono Android y ábrelo para instalarlo. Android puede pedir autorización para instalar desde esa fuente. Es un APK de depuración firmado por la compilación de Gradle, útil para pruebas; para publicar en Play Store hace falta preparar una compilación de lanzamiento firmada con una clave de publicación y completar la ficha y los requisitos de Google Play.
+
+La interfaz actual se empaqueta dentro de una app Android mediante Capacitor; no depende de una página web publicada para abrir. Su interfaz está construida con HTML/CSS/JavaScript dentro de la app, no con controles Android nativos. Los datos siguen guardándose localmente y aún no hay sincronización en la nube.
+
+## Publicar e instalar la versión web (opcional)
 
 La app ya incluye manifiesto, icono, botón de instalación y caché básica. Para que el navegador permita instalarla, primero debe servirse desde una URL HTTPS.
 

@@ -1,0 +1,12 @@
+{
+  "appId": "com.barosela.ucm",
+  "appName": "UCM",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": false
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}
